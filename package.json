@@ -1,0 +1,28 @@
+{
+  "name": "react-env",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch:server": "nodemon --exec babel-node src/server/server.js --ignore public/",
+    "watch:build": "webpack -wd",
+    "start": "npm-run-all -p watch:*"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "nodemon": "^1.14.12",
+    "npm-run-all": "^4.1.2",
+    "webpack": "^3.11.0"
+  }
+}
