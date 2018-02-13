@@ -274,3 +274,9 @@ server.listen(config.port, config.host, () => {
     "start": "npm-run-all -p watch:*"
 }
 ```
+
+## Run your project
+```bash
+~/Documents/path-to-projects
+→ yarn start
+```
