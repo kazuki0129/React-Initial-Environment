@@ -7,9 +7,10 @@ This describes how you setup the environment for react, node(express), webpack s
 
 ## Installation
 
+**Note: Make sure you are in your project directory before starting following steps.**
+
 *Add pacage.json*
 
-**You have to do this in your project directory.**
 ```bash
 ~/Documents/path-to-projects
 → yarn init
