@@ -5,6 +5,29 @@ Create the environment for react.js
 
 This describes how you setup the environment for react, node(express), webpack step by step.
 
+## Introduction
+**Project strucure would be like following tree.**
+```bash
+.
+├── README.md
+├── package.json
+├── public
+│   └── dist
+│       └── bundle.js
+├── src
+│   ├── client
+│   │   └── index.js
+│   └── server
+│       ├── config.js
+│       └── server.js
+├── views
+│   ├── footer.ejs
+│   ├── header.ejs
+│   └── index.ejs
+├── webpack.config.js
+└── yarn.lock
+```
+
 ## Installation
 
 **Note: Make sure you are in your project directory before starting following steps.**
