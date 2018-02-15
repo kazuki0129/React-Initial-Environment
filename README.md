@@ -13,10 +13,21 @@ This describes how you setup the environment for react, node(express), webpack s
 ├── package.json
 ├── public
 │   └── dist
-│       └── bundle.js
+│       ├── css
+│       │   ├── style.css
+│       │   └── style.css.map
+│       └── js
+│           ├── bundle.js
+│           └── bundle.js.map
 ├── src
 │   ├── client
-│   │   └── index.js
+│   │   ├── components
+│   │   │   └── App.jsx
+│   │   ├── index.js
+│   │   └── sass
+│   │       ├── component-style
+│   │       │   └── app-style.scss
+│   │       └── style.scss
 │   └── server
 │       ├── config.js
 │       └── server.js
@@ -303,4 +314,153 @@ server.listen(config.port, config.host, () => {
 ```bash
 ~/Documents/path-to-projects
 → yarn start
+```
+
+## Additional Setup like CSS/SASS/Image loader
+
+*Create components folder to save react components inside*
+```bash
+~/Documents/path-to-projects
+→ mkdir src/client/components
+```
+
+*Create basic componets like App.jsx*
+```bash
+~/Documents/path-to-projects
+→ touch src/client/components/App.jsx
+```
+
+*Modify App.jsx*
+```jsx
+import React, { Component } from 'react';
+
+class App extends Component {
+    constructor(props){
+        super(props);
+        
+        this.state = {
+            title: 'My React Boilerplate!'
+        }
+    }
+
+    render(){
+        return(
+            <div class="app-container">
+                <h1>{this.state.title}</h1>
+            </div>
+        );
+    }
+}
+
+export default App;
+```
+
+*Modify index.js*
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
+```
+
+*Create sass folder inside client folder*
+```bash
+~/Documents/path-to-projects
+→ mkdir src/client/sass
+```
+
+*Create scss file*
+
+I would like to separate styles for each componets so I create anothe folder called component-style inside sass folder.
+```bash
+~/Documents/path-to-projects
+→ touch src/client/sass/style.scss
+
+~/Documents/path-to-projects
+→ mkdir src/client/sass/component-style
+
+~/Documents/path-to-projects
+→ touch src/client/sass/component-style/app-style.scss
+```
+
+*Modify style.scss and app-style.scss*
+* style.scss
+```scss
+@import './component-style/app-style.scss';
+
+body{
+    margin: 0;
+}
+
+h1, h2, h3, h4, p{
+    margin: 0;
+}
+
+ul{
+    padding: 0;
+    list-style: none;
+}
+```
+
+* app-style.scss
+```scss
+.app-container{
+    width: 100vw;
+    padding: 40px 40px;
+    text-align: center;
+}
+```
+
+*Create css folder inside public/dist for output point*
+```bash
+~/Documents/path-to-projects
+→ mkdir public/dist/css
+```
+
+*Install style-loader, css-loader, sass-loader, node-sass extract-text-webpack-plugin*
+```bash
+~/Documents/path-to-projects
+→ yarn add -D style-loader css-loader sass-loader node-sass extract-text-webpack-plugin
+```
+
+*Modify webpack.config.js*
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+{
+    entry: {
+        style: __dirname + '/src/client/sass/style.scss',
+    },
+    output: {
+        path: __dirname + '/public/dist/css',
+        filename: '[name].css'
+    },
+    devtool: 'source-map',
+    module:{
+        rules:[
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader'
+                        },
+                        {
+                            loader: 'sass-loader'
+                        }
+                    ]
+                })
+            }
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin('[name].css'),
+    ]
+}
 ```
