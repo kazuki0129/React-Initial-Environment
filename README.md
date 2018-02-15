@@ -5,6 +5,10 @@ Create the environment for react.js
 
 This describes how you setup the environment for react, node(express), webpack step by step.
 
+## Technologies
+
+React / Node / Express / Webpack / Babel / EJS / SASS
+
 ## Introduction
 **Project strucure would be like following tree.**
 ```bash
